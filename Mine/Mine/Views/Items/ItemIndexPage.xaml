@@ -10,6 +10,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
