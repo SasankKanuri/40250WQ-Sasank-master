@@ -28,6 +28,9 @@ namespace Mine.Views
             data.Data = new ItemModel();
 
             BindingContext = this.ViewModel = data;
+            OnBackButtonPressed();
+
+
         }
 
         /// <summary>
@@ -49,6 +52,7 @@ namespace Mine.Views
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+
         }
 
         void Value_OnSteppetValueChanged(object sender, ValueChangedEventArgs e)
