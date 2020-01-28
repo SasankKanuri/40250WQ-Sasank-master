@@ -94,7 +94,7 @@ namespace Mine.ViewModels
             }
             record.Update(data);
             
-            var result = await DataStore.DeleteAsync(data.Id);
+            var result = await DataStore.UpdateAsync(record);
             await ExecuteLoadDataCommand();
             return result;
         }
