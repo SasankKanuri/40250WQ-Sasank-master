@@ -51,5 +51,9 @@ namespace Mine.Views
 
             await Navigation.PopAsync();
         }
+        void Value_OnSteppetValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            ValueValue.Text = string.Format("{0}", e.NewValue);
+        }
     }
 }
