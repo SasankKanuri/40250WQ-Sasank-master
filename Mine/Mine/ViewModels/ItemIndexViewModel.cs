@@ -60,7 +60,11 @@ namespace Mine.ViewModels
 
             return true;
         }
-
+        public async Task<ItemModel> Read(string id)
+        {
+            var result = await DataStore.ReadAsync(id);
+            return result;
+        }
         #region Refresh
         // Return True if a refresh is needed
         // It sets the refresh flag to false

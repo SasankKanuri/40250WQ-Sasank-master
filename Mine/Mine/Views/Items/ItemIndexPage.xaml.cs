@@ -74,5 +74,6 @@ namespace Mine.Views
                 viewModel.LoadDatasetCommand.Execute(null);
             }
         }
+      
     }
 }
