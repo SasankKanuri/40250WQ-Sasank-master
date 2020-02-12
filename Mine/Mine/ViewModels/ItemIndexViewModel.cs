@@ -17,6 +17,7 @@ namespace Mine.ViewModels
     public class ItemIndexViewModel : BaseViewModel
     {
         // The Data set of records
+        
         public ObservableCollection<ItemModel> Dataset { get; set; }
 
         /// <summary>
