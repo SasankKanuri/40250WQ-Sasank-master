@@ -67,13 +67,15 @@ namespace Mine.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            // If no data, then reload the data
+            if (viewModel.NeedsRefresh())
+            {
+                viewModel.LoadDatasetCommand.Execute(null);
+            }
             if (viewModel.Dataset.Count == 0)
             {
                 viewModel.LoadDatasetCommand.Execute(null);
             }
         }
-      
+
     }
 }

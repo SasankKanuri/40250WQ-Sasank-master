@@ -5,9 +5,10 @@ using SQLite;
 using System.Linq;
 using System.Threading.Tasks;
 using Mine.Models;
+
 namespace Mine.Services
 {
-    public class DatabaseService
+    public class DatabaseService : IDataStore<ItemModel>
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -32,9 +33,10 @@ namespace Mine.Services
                 }
             }
         }
-        public Task<int> CreateSync(ItemModel item)
+        public async Task<bool> CreateAsync(ItemModel item)
         {
-            return Database.InsertAsync(item);
+            var result = await Database.InsertAsync(item);
+            return (result == 1);
         }
 
         public Task<ItemModel> ReadAsync(string id)
@@ -62,9 +64,9 @@ namespace Mine.Services
             return (result == 1);
 
         }
-        public Task<List<ItemModel>> IndexAsync()
+        public async Task<IEnumerable<ItemModel>> IndexAsync(bool forceRefresh = false)
         {
-            return Database.Table<ItemModel>().ToListAsync();
+            return await Database.Table<ItemModel>().ToListAsync();
         }
     }
 }
