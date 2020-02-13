@@ -107,6 +107,11 @@ namespace Mine.ViewModels
             SetNeedsRefresh(true);
             return true;
         }
+        public void WipeDataList()
+        {
+            DataStore.WipeDataList();
+            SetNeedsRefresh(true);
+        }
         /// <summary>
         /// API to add the Data
         /// </summary>
