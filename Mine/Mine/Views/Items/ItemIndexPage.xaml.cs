@@ -67,14 +67,22 @@ namespace Mine.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            BindingContext = null;
+
+            // If no data, then set it for needing refresh
+            if (viewModel.Dataset.Count == 0)
+            {
+                viewModel.SetNeedsRefresh(true);
+            }
+
+            // If the needs Refresh flag is set update it
             if (viewModel.NeedsRefresh())
             {
                 viewModel.LoadDatasetCommand.Execute(null);
             }
-            if (viewModel.Dataset.Count == 0)
-            {
-                viewModel.LoadDatasetCommand.Execute(null);
-            }
+
+            BindingContext = viewModel;
         }
 
     }

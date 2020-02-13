@@ -50,22 +50,7 @@ namespace Mine.ViewModels
         public IDataStore<ItemModel> DataSource_SQL => new DatabaseService();
         public IDataStore<ItemModel> DataStore;
         public int CurrentDataSource = 0;
-        public bool SetDataSource(int isSQL)
-        {
-            if(isSQL == 1)
-            {
-                DataStore = DataSource_SQL;
-                CurrentDataSource = 1;
 
-            }
-            else
-            {
-                DataStore = DataSource_Mock;
-                CurrentDataSource = 0;
-            }
-            SetNeedsRefresh(true);
-            return true;
-        }
         // Command to force a Load of data
         public Command LoadDatasetCommand { get; set; }
 
@@ -79,18 +64,19 @@ namespace Mine.ViewModels
         public ItemIndexViewModel()
         {
             SetDataSource(0);
-            Title = "Items";
-            Dataset = new ObservableCollection<ItemModel>();
-
             MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
             {
                 SetDataSource(data);
             });
             Title = "Items";
+            Dataset = new ObservableCollection<ItemModel>();
+
+
+            Title = "Items";
 
             Dataset = new ObservableCollection<ItemModel>();
             LoadDatasetCommand = new Command(async () => await ExecuteLoadDataCommand());
-
+ 
             // Register the Create Message
             MessagingCenter.Subscribe<ItemCreatePage, ItemModel>(this, "Create", async (obj, data) =>
             {
@@ -105,7 +91,22 @@ namespace Mine.ViewModels
                 await Update(data as ItemModel);
             });
         }
-       
+        public bool SetDataSource(int isSQL)
+        {
+            if (isSQL == 1)
+            {
+                DataStore = DataSource_SQL;
+                CurrentDataSource = 1;
+
+            }
+            else
+            {
+                DataStore = DataSource_Mock;
+                CurrentDataSource = 0;
+            }
+            SetNeedsRefresh(true);
+            return true;
+        }
         /// <summary>
         /// API to add the Data
         /// </summary>
