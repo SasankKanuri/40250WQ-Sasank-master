@@ -63,11 +63,8 @@ namespace Mine.ViewModels
         /// </summary>
         public ItemIndexViewModel()
         {
-            SetDataSource(0);
-            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
-            {
-                SetDataSource(data);
-            });
+            SetDataSource(CurrentDataSource);
+            
             Title = "Items";
             Dataset = new ObservableCollection<ItemModel>();
 
@@ -90,11 +87,16 @@ namespace Mine.ViewModels
             {
                 await Update(data as ItemModel);
             });
+            MessagingCenter.Subscribe<AboutPage, int>(this, "SetDataSource", (obj, data) =>
+            {
+                SetDataSource(data);
+            });
             MessagingCenter.Subscribe<AboutPage, bool>(this, "WipeDataList", (obj, data) =>
             {
                 WipeDataList();
             });
         }
+
         public bool SetDataSource(int isSQL)
         {
             if (isSQL == 1)
