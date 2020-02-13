@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Mine.Views
@@ -19,7 +20,7 @@ namespace Mine.Views
             InitializeComponent();
             CurrentDateTime.Text = System.DateTime.Now.ToString("MM/dd/yy hh:mm:ss");
         }
-        void DataSource_Toggled(object sender, AddingNewEventArgs e)
+        void DataSource_Toggled(object sender, EventArgs e)
         {
             if (DataSourceValue.IsToggled == true)
             {
@@ -28,6 +29,14 @@ namespace Mine.Views
             else
             {
                 MessagingCenter.Send(this, "SetDataSource", 0);
+            }
+        }
+        async void WipeDataList_Clicked(object sender, System.EventArgs e)
+        {
+            bool answer = await DisplayAlert("Delete Data", "Are you sure you want to delete all data?", "Yes", "No");
+            if (answer)
+            {
+                MessagingCenter.Send(this, "WipeDataList", true);
             }
         }
     }
