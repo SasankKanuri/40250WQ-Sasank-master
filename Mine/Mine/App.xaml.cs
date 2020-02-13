@@ -18,7 +18,7 @@ namespace Mine
 
             //DependencyService.Register<MockDataStore>();
             //DependencyService.Register<DatabaseService>();
-
+            var temp = ViewModels.ItemIndexViewModel.Instance;
             // Call the Main Page to open
             MainPage = new MainPage();
         }
